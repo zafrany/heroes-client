@@ -7,12 +7,14 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HeroDisplayComponent } from './components/hero-display/hero-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     SignupFormComponent,
+    HeroDisplayComponent,
   ],
   imports: [
     BrowserModule,
