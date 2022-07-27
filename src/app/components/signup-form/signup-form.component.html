@@ -1,1 +1,30 @@
-<p>signup-form works!</p>
+<div class="container">
+  <h3>Register a new user</h3>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmitSubscribeForm()">
+    <input
+      type="text"
+      class="input-text"
+      placeholder="Email"
+      formControlName="email"
+      required
+    />
+    <div class="invalid-message" *ngIf="email?.touched && email?.invalid">{{invalidEmailMessage()}}</div>
+    <input
+      type="password"
+      class="input-text"
+      placeholder="Password"
+      formControlName="password"
+      required
+    />
+    <div class="invalid-message" *ngIf="password?.touched && password?.invalid">{{invalidPasswordMessage()}}</div>
+    <input
+      type="password"
+      class="input-text"
+      placeholder="Repeat password"
+      formControlName="repeatPassword"
+      required
+    />
+    <div class="invalid-message" *ngIf="passwordRepeated?.touched && (passwordRepeated?.invalid || signupForm.errors?.['passwordMismatch'])">{{passwordMismatchMessage()}}</div>
+    <button type="submit" [disabled]="signupForm.invalid" class="button-submit">Submit</button>
+  </form>
+</div>

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { tap } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { Hero } from 'src/app/models/hero.model';
+import { HeroService } from 'src/app/services/hero.service';
 
 
 @Component({
@@ -23,8 +23,8 @@ export class LoginPageComponent implements OnInit {
   userName!: AbstractControl|null;
   password!: AbstractControl|null;
   loginFailed: boolean = false;
-  res : any;
-  constructor(private fb: FormBuilder, private router:Router, private http: HttpClient) { }
+  myHeroes : Hero[] = [];
+  constructor(private fb: FormBuilder, private router:Router, private authService: AuthService, private heroService: HeroService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -32,29 +32,23 @@ export class LoginPageComponent implements OnInit {
       password: ['', [Validators.required]]
     }
     );
+
+    this.heroService.heroList.pipe(tap(heroes =>{
+      console.log(heroes);
+    })).subscribe((heroes) => {
+      this.myHeroes = heroes;
+    })
   }
 
   onSubmitLoginForm() {
     this.userName = this.loginForm.get('userName');
     this.password = this.loginForm.get('password');
-    console.log("password = " + this.password?.value + " username = " + this.userName?.value);
+    console.log("attempting login with: " + " username = " + this.userName?.value + " password = " + this.password?.value);
+    this.authService.login(this.userName?.value, this.password?.value);
+  }
 
-    const requestBody = {
-    "Email": this.userName?.value,
-    "Password": this.password?.value,
-    }
-
-    var httpOptions = {
-      headers: new HttpHeaders({
-         'Accept':'application/pdf'
-      }),
-      'responseType': 'text'
-   }
-
-    this.http.post<any>('https://localhost:44367/api/account/login', requestBody, httpOptions).subscribe(data => {
-      this.res = data;
-     }
-    )
+  getMyHeroes() {
+    this.heroService.getMyHeroes();
   }
 
   invalidPasswordMessage() {

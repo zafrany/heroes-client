@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     LoginPageComponent,
-    SignupFormComponent
+    SignupFormComponent,
   ],
   imports: [
     BrowserModule,
