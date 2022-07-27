@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Signup } from 'src/app/models/signup.model';
 import { SignupService } from 'src/app/services/signup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup-form',
@@ -15,7 +16,7 @@ export class SignupFormComponent implements OnInit {
   passwordRepeated!: AbstractControl|null;
   signupSuccess: boolean = true;
 
-  constructor(private fb: FormBuilder, private signupService: SignupService) { }
+  constructor(private router: Router, private fb: FormBuilder, private signupService: SignupService) { }
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -41,10 +42,11 @@ export class SignupFormComponent implements OnInit {
       }
 
       this.signupService.signup(requestData).subscribe({error: (err =>{
-        console.log(err);
+        console.log("signup failed, use exists already?");
       }),
       next: (data => {
-        console.log(data)
+        console.log("signup successfull - redirecting");
+        this.router.navigate(['login']);
       })})
   }
 

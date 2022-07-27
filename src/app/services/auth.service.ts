@@ -23,11 +23,6 @@ export class AuthService{
       "Password": password
     }
 
-    this.http.post<Token>('https://localhost:44367/api/account/login', requestBody).subscribe(data => {
-      if(data !== null) {
-        localStorage.setItem('token', data.token);
-      }
-      }
-    )
+    return this.http.post<Token>('https://localhost:44367/api/account/login', requestBody);
   }
 }

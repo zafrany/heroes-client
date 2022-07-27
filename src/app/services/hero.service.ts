@@ -23,9 +23,11 @@ export class HeroService {
     });
     const requestOptions = { headers: headers };
 
-    this.http.get<Hero[]>('https://localhost:44367/api/heroes/myHeroes', {headers: headers}).subscribe(data => {
-      this._heroList = data;
-      this._heroListSubject.next(this._heroList);
-    })
+    return this.http.get<Hero[]>('https://localhost:44367/api/heroes/myHeroes', {headers: headers});
+  }
+
+  setHeroList(heroList: Hero[]){
+    this._heroList = heroList;
+    this._heroListSubject.next(this._heroList);
   }
 }
