@@ -59,18 +59,6 @@ export class LoginPageComponent implements OnInit {
     )
   }
 
-  getMyHeroes() {
-    this.heroService.getMyHeroes().subscribe(
-      {
-        error: (err =>{
-        console.log("get my heroes error!");
-      }),
-      next: data => {
-        this.heroService.setHeroList(data);
-      }
-      })
-  }
-
   invalidPasswordMessage() {
     const errors = this.password?.errors;
     if(errors?.['required'])
