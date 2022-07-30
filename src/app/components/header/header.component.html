@@ -1,0 +1,44 @@
+<div class="header">
+  <a class="hero-flex header-nav-item"
+    routerLink="/heroes"
+    routerLinkActive="active-link"
+  >
+    <a class="header__nav__home">
+      All heroes
+    </a>
+  </a>
+  <a class="hero-flex header-nav-item"
+    routerLink="/my-heroes"
+    routerLinkActive="active-link"
+  >
+    <a class="header__nav__home">
+      My heroes
+    </a>
+  </a>
+  <div class="user-managment">
+    <a class="header-nav-item"
+      routerLink="/signup"
+      routerLinkActive="active-link"
+      *ngIf="!loggedUser()"
+    >
+      <a>Signup</a>
+    </a>
+    <a class="header-nav-item"
+        routerLink="/login"
+        routerLinkActive="active-link"
+        *ngIf="!loggedUser()"
+    >
+      <a>Login</a>
+    </a>
+    <a class="header-nav-item"
+        routerLink="/home"
+        *ngIf="loggedUser()"
+        (click)="onLogout()"
+    >
+      <a>Logout</a>
+    </a>
+    <div class="header-nav-item logged-user" *ngIf="currentUser!==null">
+      <div class="logged-user">Good day, {{currentUser}}</div>
+    </div>
+  </div>
+</div>

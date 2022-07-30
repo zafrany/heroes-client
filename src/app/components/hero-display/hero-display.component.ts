@@ -25,6 +25,7 @@ export class HeroDisplayComponent implements OnInit {
       next: data => {
         this.heroService.setHeroList(data);
         this._heroList = data;
+        console.log(data);
       }
       })
   }

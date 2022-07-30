@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Signup } from 'src/app/models/signup.model';
-import { SignupService } from 'src/app/services/signup.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,12 +16,12 @@ export class SignupFormComponent implements OnInit {
   passwordRepeated!: AbstractControl|null;
   signupSuccess: boolean = true;
 
-  constructor(private router: Router, private fb: FormBuilder, private signupService: SignupService) { }
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       repeatPassword: ['', [Validators.required]],
     },
     {
@@ -41,12 +41,25 @@ export class SignupFormComponent implements OnInit {
         confirmPassword: this.passwordRepeated?.value
       }
 
-      this.signupService.signup(requestData).subscribe({error: (err =>{
+      this.authService.signup(requestData).subscribe({error: (err =>{
         console.log("signup failed, use exists already?");
       }),
       next: (data => {
         console.log("signup successfull - redirecting");
-        this.router.navigate(['login']);
+        this.authService.login(this.email?.value, this.password?.value).subscribe(
+          {
+            error: (err =>{
+            console.log("login failed");
+          }),
+          next: (data => {
+            if(data !== null) {
+              console.log(data);
+              this.authService.setLoggedUser(this.email?.value);
+              this.router.navigate(['heroes']);
+          }
+          })}
+        )
+        this.router.navigate(['heroes']);
       })})
   }
 

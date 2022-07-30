@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Hero } from 'src/app/models/hero.model';
 import { HeroService } from 'src/app/services/hero.service';
@@ -32,12 +31,6 @@ export class LoginPageComponent implements OnInit {
       password: ['', [Validators.required]]
     }
     );
-
-    this.heroService.heroList.pipe(tap(heroes =>{
-      console.log(heroes);
-    })).subscribe((heroes) => {
-      this.myHeroes = heroes;
-    })
   }
 
   onSubmitLoginForm() {
@@ -53,7 +46,8 @@ export class LoginPageComponent implements OnInit {
       next: (data => {
         if(data !== null) {
           console.log(data);
-          localStorage.setItem('token', data.token);
+          this.authService.setLoggedUser(this.userName?.value);
+          this.router.navigate(['heroes']);
       }
       })}
     )

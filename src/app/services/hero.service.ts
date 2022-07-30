@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Hero } from '../models/hero.model';
 import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,7 @@ export class HeroService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.authService.token}`
     });
-    const requestOptions = { headers: headers };
-
-    return this.http.get<Hero[]>('https://localhost:44367/api/heroes/myHeroes', {headers: headers});
+    return this.http.get<Hero[]>(environment.serverUrl + '/heroes/myHeroes', {headers: headers});
   }
 
   setHeroList(heroList: Hero[]){

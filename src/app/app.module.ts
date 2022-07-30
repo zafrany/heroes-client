@@ -8,6 +8,9 @@ import { SignupFormComponent } from './components/signup-form/signup-form.compon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeroDisplayComponent } from './components/hero-display/hero-display.component';
+import { HeroCardComponent } from './components/hero-card/hero-card.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { HeroDisplayComponent } from './components/hero-display/hero-display.com
     LoginPageComponent,
     SignupFormComponent,
     HeroDisplayComponent,
+    HeroCardComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
