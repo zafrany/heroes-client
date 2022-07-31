@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Token } from 'src/app/models/token.model';
 import { Signup } from '../models/signup.model';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+import { tap,Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,7 +11,11 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService{
   private _authToken: string|null = null;
+
   private _loggedUser: string|null = null;
+  private _loggedUserSubject = new Subject<string|null> ();
+
+  currentUserData = this._loggedUserSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -42,12 +47,29 @@ export class AuthService{
     return this.http.post(environment.serverUrl + '/account/signup', requestBody);
   }
 
-  setLoggedUser(user : string) {
+  setLoggedUser(user : string|null) {
     this._loggedUser = user;
+    this._loggedUserSubject.next(this._loggedUser);
   }
 
   getLoggedUser(): string|null {
     return this._loggedUser;
+  }
+
+  logoutUser(){
+    this.setLoggedUser(null);
+    sessionStorage.removeItem("token");
+    this._authToken = null;
+  }
+
+  loggedUser(){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+  });
+    return this.http.get<string>(environment.serverUrl + '/account/loggedUser' , {headers: headers}).pipe(tap(userName=>{
+      console.log(userName);
+    }))
   }
 
 }

@@ -1,1 +1,14 @@
-<p>hero-card works!</p>
+<div class="heroes-container">
+  <div class="card">
+    <img src="../assets/The_Hero.jpg" class="picture-flex-container">
+    <div>Name: {{hero.name}}</div>
+    <div>Ability: {{hero.ability}}</div>
+    <div>Date started training: {{hero.startedTrainingDate}}</div>
+    <div>Starting power: {{hero.startingPower}}</div>
+    <div>Current power: {{hero.currentPower}}</div>
+    <div>Suit colors: {{hero.suitColors}}</div>
+    <div>Remaining training sessions: {{hero.remainingTrains}}</div>
+    <button class="training-button" (click)="trainHero()">Train Hero</button>
+  </div>
+</div>
+

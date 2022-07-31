@@ -1,1 +1,6 @@
-<button (click) = "getMyHeroes()"  class="button-submit">GET REUQEST</button>
+<div class="storefront-container">
+  <div *ngFor="let hero of _heroes" class="card-container">
+    <app-hero-card  [hero]="hero">
+    </app-hero-card>
+  </div>
+</div>

@@ -11,7 +11,7 @@ export class HeroDisplayComponent implements OnInit {
 
   constructor(private heroService : HeroService) { }
 
-  private _heroList: Hero[] = [];
+  _heroes: Hero[] = [];
   ngOnInit(): void {
     this.getMyHeroes();
   }
@@ -24,8 +24,8 @@ export class HeroDisplayComponent implements OnInit {
       }),
       next: data => {
         this.heroService.setHeroList(data);
-        this._heroList = data;
-        console.log(data);
+        this._heroes = data;
+        console.log(this._heroes);
       }
       })
   }
