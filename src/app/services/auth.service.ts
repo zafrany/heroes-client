@@ -65,9 +65,15 @@ export class AuthService{
   loggedUser(){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.token}`
-  });
-    return this.http.get<string>(environment.serverUrl + '/account/loggedUser' , {headers: headers}).pipe(tap(userName=>{
+      'Authorization': `Bearer ${this.token}`,
+    });
+
+    const requestOptions: Object = {
+      headers: headers,
+      responseType: 'text'
+    }
+
+    return this.http.get<string>(environment.serverUrl + '/account/loggedUser' , requestOptions).pipe(tap(userName=>{
       console.log(userName);
     }))
   }
