@@ -25,6 +25,10 @@ export class HeroService {
     return this.http.get<Hero[]>(environment.serverUrl + '/heroes/myHeroes', {headers: this.headers});
   }
 
+  getAllHeroes() {
+    return this.http.get<Hero[]>(environment.serverUrl + '/heroes/', {headers: this.headers});
+  }
+
   trainHero(heroId : number) {
     return this.http.patch<Hero>(environment.serverUrl + `/heroes/:${heroId}/RemainingTrains`,{}, {headers: this.headers}).pipe(tap(data => {
       this.updateHero(data);

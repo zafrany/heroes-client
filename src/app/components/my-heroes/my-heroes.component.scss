@@ -1,0 +1,28 @@
+.hero-container {
+  display: grid;
+  grid-auto-flow: column;
+  padding-top: 4rem;
+  min-height: 100vh;
+  width: 100%;
+  background: #1a3953;
+}
+
+.card-container {
+  height: fit-content;
+}
+
+.training-button {
+  cursor: pointer;
+  display: block;
+  padding: 0.5rem;
+  color: white;
+  background: #118ab2;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.training-button:disabled{
+  background: #ccc;
+  cursor: not-allowed;
+}

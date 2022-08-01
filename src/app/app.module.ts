@@ -11,6 +11,7 @@ import { HeroDisplayComponent } from './components/hero-display/hero-display.com
 import { HeroCardComponent } from './components/hero-card/hero-card.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MyHeroesComponent } from './components/my-heroes/my-heroes.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HeroCardComponent,
     HeaderComponent,
     FooterComponent,
+    MyHeroesComponent,
   ],
   imports: [
     BrowserModule,

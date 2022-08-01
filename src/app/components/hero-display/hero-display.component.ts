@@ -13,11 +13,11 @@ export class HeroDisplayComponent implements OnInit {
 
   _heroes: Hero[] = [];
   ngOnInit(): void {
-    this.getMyHeroes();
+    this.getAllHeroes();
   }
 
-  getMyHeroes() {
-    this.heroService.getMyHeroes().subscribe(
+  getAllHeroes() {
+    this.heroService.getAllHeroes().subscribe(
       {
         error: (err =>{
         console.log("get my heroes error!");
