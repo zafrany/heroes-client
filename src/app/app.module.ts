@@ -8,10 +8,11 @@ import { SignupFormComponent } from './components/signup-form/signup-form.compon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeroDisplayComponent } from './components/hero-display/hero-display.component';
-import { HeroCardComponent } from './components/hero-card/hero-card.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
+
 import { MyHeroesComponent } from './components/my-heroes/my-heroes.component';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module'; //to be removed
+
 
 @NgModule({
   declarations: [
@@ -19,9 +20,6 @@ import { MyHeroesComponent } from './components/my-heroes/my-heroes.component';
     LoginPageComponent,
     SignupFormComponent,
     HeroDisplayComponent,
-    HeroCardComponent,
-    HeaderComponent,
-    FooterComponent,
     MyHeroesComponent,
   ],
   imports: [
@@ -30,6 +28,9 @@ import { MyHeroesComponent } from './components/my-heroes/my-heroes.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CoreModule,
+    SharedModule //to be removed
+
   ],
   providers: [],
   bootstrap: [AppComponent]

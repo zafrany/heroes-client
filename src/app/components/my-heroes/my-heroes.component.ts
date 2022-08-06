@@ -10,23 +10,29 @@ import { HeroService } from 'src/app/services/hero.service';
 })
 export class MyHeroesComponent implements OnInit {
 
-  _heroes: Hero[] = [];
+  heroes: Hero[] = [];
   constructor(private heroService: HeroService) { }
 
   ngOnInit(): void {
     this.getMyHeroes();
+    this.heroService.heroList.subscribe((heroes)=>{
+      this.heroes = heroes;
+    })
+    this.heroes = this.heroService.heroesList;
+    console.log("onNgInit called");
   }
 
-  getMyHeroes() {
+  getMyHeroes() : void {
     this.heroService.getMyHeroes().subscribe(
       {
         error: (err =>{
         console.log("get my heroes error!");
       }),
       next: data => {
+        console.log("getMyHeroes data =" + JSON.stringify(data));
         this.heroService.setHeroList(data);
-        this._heroes = data;
-        console.log(this._heroes);
+        this.heroes = data;
+        console.log(this.heroes);
       }
       })
   }
@@ -37,8 +43,8 @@ export class MyHeroesComponent implements OnInit {
       console.log("train hero error!");
     }),
     next: data => {
-      var index = this._heroes.findIndex(hero => hero.id === data.id);
-      this._heroes[index ] = data;
+      const index = this.heroes.findIndex(hero => hero.id === data.id);
+      this.heroes[index ] = data;
     }
     })
   }

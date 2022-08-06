@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Token } from 'src/app/models/token.model';
-import { Signup } from '../models/signup.model';
+import { Signup } from 'src/app/models/signup.model';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { tap,Subject } from 'rxjs';

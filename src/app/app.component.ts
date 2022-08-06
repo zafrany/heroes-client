@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from './services/auth.service';
+import { LoaderService } from './core/services/loader.service';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,20 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  loaderOpen : boolean = true;
 
-  constructor(private authService : AuthService) { }
+  constructor(private authService : AuthService, private loaderService : LoaderService) { }
 
   ngOnInit(): void {
+
+    this.loaderService.currentLoaderState.subscribe((loaderOpen)=>{
+      this.loaderOpen = loaderOpen;
+    })
+
+    setTimeout(() => {
+      this.loaderService.closeLoader();
+    }, 2000);
+
     this.authService.loggedUser().subscribe({
       error: (err =>{
       console.log("loggedUser error!");

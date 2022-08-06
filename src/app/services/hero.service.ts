@@ -3,7 +3,7 @@ import { Subject, tap } from "rxjs";
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Hero } from '../models/hero.model';
-import { AuthService } from './auth.service';
+import { AuthService } from '../core/services/auth.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,21 +16,28 @@ export class HeroService {
   private _heroListSubject = new Subject<Hero[]>();
   heroList = this._heroListSubject.asObservable();
 
-  headers = new HttpHeaders({
+  getMyHeroes() {
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.authService.token}`
-  });
-
-  getMyHeroes() {
-    return this.http.get<Hero[]>(environment.serverUrl + '/heroes/myHeroes', {headers: this.headers});
+    });
+    return this.http.get<Hero[]>(environment.serverUrl + '/heroes/myHeroes', {headers: headers});
   }
 
   getAllHeroes() {
-    return this.http.get<Hero[]>(environment.serverUrl + '/heroes/', {headers: this.headers});
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.authService.token}`
+    });
+    return this.http.get<Hero[]>(environment.serverUrl + '/heroes/', {headers: headers});
   }
 
   trainHero(heroId : number) {
-    return this.http.patch<Hero>(environment.serverUrl + `/heroes/:${heroId}/RemainingTrains`,{}, {headers: this.headers}).pipe(tap(data => {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.authService.token}`
+    });
+    return this.http.patch<Hero>(environment.serverUrl + `/heroes/:${heroId}/RemainingTrains`,{}, {headers: headers}).pipe(tap(data => {
       this.updateHero(data);
     }));
   }
@@ -41,8 +48,12 @@ export class HeroService {
   }
 
   updateHero(updatedHero : Hero) {
-    var res = this._heroList.find(hero => hero.id === updatedHero.id);
+    let res = this._heroList.find(hero => hero.id === updatedHero.id);
     res = updatedHero;
     this._heroListSubject.next(this._heroList);
+  }
+
+  get heroesList(){
+    return this._heroList;
   }
 }

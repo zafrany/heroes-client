@@ -11,9 +11,13 @@ export class HeroDisplayComponent implements OnInit {
 
   constructor(private heroService : HeroService) { }
 
-  _heroes: Hero[] = [];
+  heroes: Hero[] = [];
   ngOnInit(): void {
+    this.heroService.heroList.subscribe((heroes)=>{
+      this.heroes = heroes;
+    })
     this.getAllHeroes();
+    this.heroes = this.heroService.heroesList;
   }
 
   getAllHeroes() {
@@ -23,9 +27,10 @@ export class HeroDisplayComponent implements OnInit {
         console.log("get my heroes error!");
       }),
       next: data => {
+        console.log("getAllHeroes data =" + JSON.stringify(data));
         this.heroService.setHeroList(data);
-        this._heroes = data;
-        console.log(this._heroes);
+        this.heroes = data;
+        console.log(this.heroes);
       }
       })
   }

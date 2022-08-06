@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Hero } from 'src/app/models/hero.model';
 import { HeroService } from 'src/app/services/hero.service';
 
@@ -12,11 +11,6 @@ import { HeroService } from 'src/app/services/hero.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-
-@Injectable({
-  providedIn: 'root'
-})
-
 export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
   userName!: AbstractControl|null;
