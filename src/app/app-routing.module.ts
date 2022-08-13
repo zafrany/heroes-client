@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeroDisplayComponent } from './components/hero-display/hero-display.component';
+import { HeroDisplayComponent } from './modules/hero/pages/hero-display/hero-display.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
-import { MyHeroesComponent } from './components/my-heroes/my-heroes.component';
+import { MyHeroesComponent } from './modules/hero/pages/my-heroes/my-heroes.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { HeroDisplayGuard } from './services/hero-display.guard';
 

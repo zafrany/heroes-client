@@ -7,9 +7,8 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HeroDisplayComponent } from './components/hero-display/hero-display.component';
 
-import { MyHeroesComponent } from './components/my-heroes/my-heroes.component';
+import { HeroModule } from './modules/hero/hero.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module'; //to be removed
 
@@ -19,8 +18,6 @@ import { SharedModule } from './shared/shared.module'; //to be removed
     AppComponent,
     LoginPageComponent,
     SignupFormComponent,
-    HeroDisplayComponent,
-    MyHeroesComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,8 +26,8 @@ import { SharedModule } from './shared/shared.module'; //to be removed
     ReactiveFormsModule,
     HttpClientModule,
     CoreModule,
-    SharedModule //to be removed
-
+    SharedModule, //to be removed
+    HeroModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
