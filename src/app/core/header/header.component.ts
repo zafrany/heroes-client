@@ -13,10 +13,10 @@ export class HeaderComponent implements OnInit {
   constructor(private authService : AuthService, private router: Router) { }
 
   ngOnInit(): void {
-
     this.authService.currentUserData.subscribe((currentUser)=>{
       this.currentUser = currentUser;
     })
+    this.authService.loggedUser();
   }
 
   loggedUser() : boolean{

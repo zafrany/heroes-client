@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../core/services/auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HeroDisplayGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(

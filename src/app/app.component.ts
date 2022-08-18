@@ -22,14 +22,6 @@ export class AppComponent {
       this.loaderService.closeLoader();
     }, 2000);
 
-    this.authService.loggedUser().subscribe({
-      error: (err =>{
-      console.log("loggedUser error!");
-    }),
-    next: userName => {
-      this.authService.setLoggedUser(userName);
-    }
-    })
   }
 
   title = 'heroes';

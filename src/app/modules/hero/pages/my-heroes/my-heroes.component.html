@@ -1,6 +1,6 @@
 <div class="hero-container">
   <div *ngFor="let hero of heroes" class="card-container">
-    <app-hero-card  [hero]="hero">
+    <app-hero-card [hero]="hero">
       <button [disabled]="hero.remainingTrains === 0" class="training-button" (click)="trainHero(hero)">Train Hero</button>
     </app-hero-card>
   </div>

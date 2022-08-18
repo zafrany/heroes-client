@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from 'src/app/models/hero.model';
-import { HeroService } from 'src/app/services/hero.service';
+import { Hero } from '../../models/hero.model';
+import { HeroService } from '../../services/hero.service';
 
 @Component({
   selector: 'app-hero-display',
@@ -29,6 +29,7 @@ export class HeroDisplayComponent implements OnInit {
       next: data => {
         console.log("getAllHeroes data =" + JSON.stringify(data));
         this.heroService.setHeroList(data);
+        console.log(data);
         this.heroes = data;
         console.log(this.heroes);
       }

@@ -3,12 +3,10 @@ import { Subject, tap } from "rxjs";
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Hero } from '../models/hero.model';
-import { AuthService } from '../core/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { environment } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HeroService {
   constructor(private http: HttpClient, private authService: AuthService) {}
   private _heroList : Hero[] = [];

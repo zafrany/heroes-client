@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Hero } from 'src/app/models/hero.model';
-import { HeroService } from 'src/app/services/hero.service';
+import { Hero } from 'src/app/modules/hero/models/hero.model';
+import { HeroService } from 'src/app/modules/hero/services/hero.service';
 
 
 @Component({

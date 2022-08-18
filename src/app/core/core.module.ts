@@ -4,7 +4,9 @@ import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './services/loader.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
+import { AuthService } from './services/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +16,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    SharedModule,
   ],
   exports: [
     LoaderComponent,
@@ -23,6 +25,7 @@ import { RouterModule } from '@angular/router';
   ],
   providers: [
     LoaderService,
+    AuthService,
   ],
 })
 export class CoreModule { }
